@@ -1,9 +1,10 @@
 # extract_path_neo4j
 
-**Dependancies:**
-* Neo4j 
-* Vagrant virtual machine https://app.vagrantup.com/CecilePereira/boxes/AdaptMetrecon​
-* TEES https://github.com/jbjorne/TEES/wiki
+**Dependencies:**
+* Neo4j - https://neo4j.com/download-center/
+* Vagrant virtual machine - https://app.vagrantup.com/CecilePereira/boxes/AdaptMetrecon​
+* TEES - https://github.com/jbjorne/TEES/wiki
+* tmChem - https://www.ncbi.nlm.nih.gov/research/bionlp/Tools/tmchem/
 
 Note: If the installation of TEES with the configure.py program do not succeed to install svm_multiclass you may have to correct one line of the TEES file: Utils/DefaultSettings.py.
 Try to change:
