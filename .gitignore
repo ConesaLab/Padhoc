@@ -1,0 +1,23 @@
+# SIF file with the graph
+*.SIF
+
+# cypher query
+*.cy
+
+# arabidopsis data
+dictionaries/*
+metabolism_corp/*
+
+#TEES large
+
+*.pyc
+
+#folders
+databases/*
+data/*
+neo4j_dbs/*
+
+*.orig
+
+Inparanoid/INPARA_blastp*
+*.out
