@@ -1,4 +1,4 @@
-# extract_path_neo4j
+# Padhoc
 
 **Dependencies:**
 * Neo4j - https://neo4j.com/download-center/
