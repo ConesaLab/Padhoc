@@ -32,6 +32,8 @@ class compress_graph():
 		Create the dictionaries to extract the neo4j database
 		into python object
 		'''
+		self.neo4j.session.run('MATCH (n) WHERE "uniprotID" IN keys(n) SET n.database = TRUE')
+		self.neo4j.session.run('MATCH (n) WHERE "chebiID" IN keys(n) SET n.database = TRUE')
 		result = gd.extract_pattern(pattern)
 		for r in result:
 			nID = r['nID']; nSent = r['nSentences']
