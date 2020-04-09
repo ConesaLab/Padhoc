@@ -30,7 +30,7 @@ import glob
 def test(progDir):
     return True
 
-def run(input,output=None,rep="/home/salva/tmChem/"):
+def run(input,output=None,rep="/home/user/tmChem/"):
     #input is an elementTree object!
 #    print("Loading corpus "+input,file=sys.stderr)
 

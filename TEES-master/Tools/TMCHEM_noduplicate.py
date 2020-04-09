@@ -30,7 +30,7 @@ import glob
 def test(progDir):
     return True
 
-def run(input,output=None,rep="/home/salva/tmChem/"): #change home directory if runned from local
+def run(input,output=None,rep="/home/user/tmChem/"): #change home directory if runned from local
     #input is an elementTree object!
 #    print("Loading corpus "+input,file=sys.stderr)
 
