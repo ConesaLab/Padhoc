@@ -74,7 +74,7 @@ class graph_database():
         '''
         Connect to the graph db using neo4j credentials
         '''
-        self.driver = GraphDatabase.driver("bolt://localhost:7687",auth=basic_auth(self.user,self.password))
+        self.driver = GraphDatabase.driver("bolt://localhost:7687",auth=basic_auth(self.user,self.password), encrypted=False)
         self.session = self.driver.session()
         self.session.run("CREATE CONSTRAINT ON (n:Compound) ASSERT n.id IS UNIQUE")
         self.session.run("CREATE CONSTRAINT ON (n:Protein) ASSERT n.id IS UNIQUE")
