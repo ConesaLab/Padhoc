@@ -10,7 +10,7 @@
 
 *Libraries*
 
-Run installation.sh file to install all dependencies required by Padhoc.
+Run install_packages.sh file to install all dependencies required by Padhoc.
 
 *Neo4j*
 
@@ -40,6 +40,7 @@ for:
 URL["SVM_MULTICLASS_LINUX"] = "http://download.joachims.org/svm_multiclass/current/svm_multiclass_linux32.tar.gz"
 
 *Brenda*
+
 Create BRENDA user and password at https://www.brenda-enzymes.org/register.php, these are required by Padhoc to SOAP access the BRENDA database.
 
 
