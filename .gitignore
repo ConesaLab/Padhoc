@@ -9,6 +9,9 @@ dictionaries/*
 metabolism_corp/*
 
 #TEES large
+TEES-master/.tees
+TEES-master/.tees_local_settings.py
+TEES-master/.tees_local_settings.pyc
 
 *.pyc
 
