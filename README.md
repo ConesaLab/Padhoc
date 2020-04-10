@@ -4,6 +4,7 @@
 * Neo4j - https://neo4j.com/download/
 * Vagrant virtual machine - https://app.vagrantup.com/CecilePereira/boxes/AdaptMetrecon -> **Temporaly unavailable**
 * tmChem - https://www.ncbi.nlm.nih.gov/research/bionlp/Tools/tmchem/
+* TEES - Provided with Padhoc in TEES-master
 
 
 **Installing dependencies:**
