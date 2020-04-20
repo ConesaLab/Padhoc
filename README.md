@@ -2,7 +2,7 @@
 
 **Dependencies:**
 * Neo4j - https://neo4j.com/download/
-* Vagrant virtual machine - https://app.vagrantup.com/CecilePereira/boxes/AdaptMetrecon -> **Temporaly unavailable**
+* Vagrant virtual machine - https://app.vagrantup.com/scasani/boxes/adaptedMetrecon
 * tmChem - https://www.ncbi.nlm.nih.gov/research/bionlp/Tools/tmchem/
 * TEES - Provided with Padhoc in TEES-master
 
@@ -16,7 +16,7 @@ Run install_packages.sh file to install all dependencies required by Padhoc.
 *Neo4j*
 
 Follow Neo4j installing instructions, download desktop version and set user and password, these are needed for Padhoc to connect to the database.
-Create an empty graph within Neo4j App.
+Create an empty graph within Neo4j App. Graph version must be 3.5 or lower.
 
 
 *tmChem*
