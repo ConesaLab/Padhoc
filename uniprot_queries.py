@@ -238,9 +238,10 @@ class uniprot_queries():
 if __name__ == '__main__':
 
     lista = []
-    uniprot = uniprot_queries('Homo sapiens', '9606')
-    print uniprot.query_id('rpoB')
-    sys.exit()
+    #uniprot = uniprot_queries('Homo sapiens', '9606')
+    #print uniprot.query_id('rpoB')
+    uniprot = uniprot_queries('', '')
+
     a = open(argv[1]).read()
     for gene in a.split('\n'):
         uniID = uniprot.query_id(gene)[0]

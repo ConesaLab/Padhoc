@@ -293,16 +293,41 @@ if __name__ == '__main__':
 
 	chebi = chebi_from_string()
 	chebi.chebi_connect()
-	uniprot = uniprot_queries('Homo sapiens', '9606')
+	uniprot = uniprot_queries('Saccharomyces cerevisiae', '4932')
 
 	brenda = brenda_annotation('salcagal@alumni.uv.es', 'salvacasani91') # create brenda_annotation object
 	brenda.access_protocol() # access to brenda
-	neo4j = graph_database(chebi, uniprot, brenda,'Homo sapiens','neo4j','salva') #
+	neo4j = graph_database(chebi, uniprot, brenda,'Saccharomyces cerevisiae','neo4j','salva') #
 	neo4j.connect()
 
 	compareDB = compare_string_to_db(neo4j)
 	compareDB.neo4j_to_dictio()
 
+	ox_metabolites = ['succinate', 'citrulline', 'glycine', 'leucine', 'lysine', 'ornithine', 'proline']
+	rb_metabolites = ['citrate', 'nam', 'namn', 'naad', 'adpr', 'gmp', 'cmp', 'imp']
+	rc_metabolites = ['3-hba', 'malate', 'fumarate', 'isoleucine', 'nad', 'atp', 'gtp', 'cdp', 'ctp', 'malonyl coa']
+
+	print compareDB.clean('ATP(4-)')
+
+	trans_metab = []
+
+	for elem in ox_metabolites:
+		metab = compareDB.similar_nodes(elem)
+#		metabs = 
+		is_metab = metab[1]
+		if is_metab == True:
+			print elem
+			for mettt in metab[0]:
+				trans_metab.append(mettt)
+
+	print trans_metab
+
+	print compareDB.search_in_dictio("succinate")
+	print compareDB.similar_nodes("succinate")
+	print compareDB.search_in_dictio("ATP")
+
+
+	sys.exit()
 	print compareDB.clean("PanD complex")
 	print compareDB.similar_nodes('rpoB')
 	sys.exit()

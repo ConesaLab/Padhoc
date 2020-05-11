@@ -219,7 +219,7 @@ class inparanoid():
 if __name__ == '__main__':
 
 	
-	inparanoid_repo = '/home/salva/citrus/BrasionSynth/inportho/'
+	inparanoid_repo = '/home/salva/citrus2/BrasionSynth/inportho/'
 
 	species = ['Citrus Clementina', 'Citrus sinensis', 'Arabidopsis thaliana', 'Physcomitrella patens']
 	uniprot = uniprot_queries('Arabidopsis thaliana', '3702')
@@ -228,17 +228,16 @@ if __name__ == '__main__':
 
 	gd = graph_database(chebi, uniprot, '', '', 'neo4j', 'salva')
 	gd.connect()
-	inparanoid = inparanoid(gd, '/home/salva/citrus/data/', '/home/salva/citrus/BrasionSynth/blastp/', '/home/salva/citrus/BrasionSynth/inportho/')
+	inparanoid = inparanoid(gd, '/home/salva/citrus2/data/', '/home/salva/citrus2/BrasionSynth/blastp/', '/home/salva/citrus2/BrasionSynth/inportho/')
 
-#	for specie in species:
-#		inparanoid.extract_fasta(specie)
-#	inparanoid.doblast(species)
-#	inparanoid.doinparanoid()
-	sys.exit()
+	#for specie in species:
+	#	inparanoid.extract_fasta(specie)
+	inparanoid.doblast(species)
+	inparanoid.doinparanoid()
+
 	resfiles = glob.glob(inparanoid_repo + '/sqltable/sqltable*')
 	for fname in resfiles:
 		orthologs = inparanoid.parse_inparanoid(fname)
 		inparanoid.add_blast_orthology_relationship(orthologs)
-	sys.exit()
 	
 	inparanoid.research_orthologs('Q8LEB2', 'Arabidopsis thaliana')
