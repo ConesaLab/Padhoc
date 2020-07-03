@@ -53,9 +53,9 @@ Create BRENDA user and password at https://www.brenda-enzymes.org/register.php, 
 * In case a previously create database aims to be started, click the terminal within neo4j graph, and import the database using neo4j-admin load command. Then change the running database at settings file and reinitialize the database.
 
 
-2) Run Padhoc either in one specie or in multiple specie.
+2) Run Padhoc either in one species or in multiple species.
 
-2.1) Run Padhoc for one specie:
+2.1) Run Padhoc for one species:
 The main script used to run padhoc is: run_padhoc.py
 The options can be accessed using command: python run_padhoc.py -h 
 Compulsory arguments are: repository, email, password, user graph db, user db password, organism and taxa ID
@@ -69,17 +69,17 @@ Compulsory arguments are: repository, email, password, user graph db, user db pa
 Command line example: 
 python run_padhoc.py -o output_dir -k path_to_search -m 100 -y -c GE09 GE11 -z path_to_teesFolder --usergdb neo4j_user_db --passgraphdb neo4j_password -b 1 -s 'Homo sapiens' -t taxa_id -e brenda_email -p brenda_password
 
-2.2) Several specie:
-This option is run using the multiSpecies_newtork.py script. The options to be used are displayed using -h, but they are basically the same as in the case for one specie. 
-This script runs several times the run_padhoc script, once for each input specie, and at the end of the script searches in InParanoid for possible homologies between the proteins of the different species. It also includes paralogies within one specie.
+2.2) Several species:
+This option is run using the multiSpecies_newtork.py script. The options to be used are displayed using -h, but they are basically the same as in the case for one species. 
+This script runs several times the run_padhoc script, once for each input species, and at the end of the script searches in InParanoid for possible homologies between the proteins of the different species. It also includes paralogies within one species.
 
 
 3) Graph Compression
 
 All information from databases and text has now been introduced to Neo4j, the database contains thus redundant information that does not necesarily add knowledge to the graph. Padhoc offers the user the possibility to compress the graph database, which clusters the nodes that have a similar name. This step is strongly recommended and is run from padhoc's folder compress_graph as follows:
 
-  - One specie: python -m path.to.padhoc.compress_graph.compress_graph
-  - More than one specie: python -m path.to.padhoc.compress_graph.multiSpecies_compress_graph
+  - One species: python -m path.to.padhoc.compress_graph.compress_graph
+  - More than one species: python -m path.to.padhoc.compress_graph.multiSpecies_compress_graph
   
 This step can take long if the subgraph is big, since padhoc compares similarities between all entities in the database and clusters them.
 
@@ -91,3 +91,37 @@ The network is displayed using Neo4j visualization capabilities. Neo4j is access
 (n)-[r:Compressed_relationship]-(y) RETURN n,y
 
 It is possible to retrieve alternative information by using other cypher queries (tutorial for Cypher language: https://neo4j.com/developer/cypher-basics-i/).
+
+
+**Toy dataset**
+We have included a toy dataset to show the principles of Padhoc and for the user to ensure that the installation works properly. The toy example data is included with Padhoc in the folder toy_dataset.
+
+1) Import Homo sapiens database in Neo4j
+Create a new grap (Add graph > Create Local Graph), recommended version: 3.5.14. Select Manage and Open Terminal.
+Once the terminal is started, write the following command, substituting the "path_to_padhoc" with your local path:
+
+ bin/neo4j-admin load --from="path_to_padhoc"/homoSapiens_db.dump --database=hsapiens_example.db
+ 
+Close the terminal. Change the database that Neo4j is using: Go to Settings > change line 11 where it says "#dbms.active_database=graph.db" to dbms.active_database=hsapiens_example.db (deleting the #). Apply changes.
+
+2) Start Neo4j database
+Start the database by clicking the "play" symbol. Once it is running you can navigate the database to visualize the structure.
+
+3) Run Padhoc
+If you haven't, export the TEES settings: export TEES_SETTINGS=~path_to_tees/.tees_local_settings.py
+Go to your padhoc folder in the terminal and run the following command:
+
+python run_padhoc.py -i toy_dataset/text6U1CR1X4/ -o padhoc_example -y -c GE09 GE11 --usergdb "neo4j_user" -b 0 --passgraphdb "neo4j_password" -z TEES-master -s "Homo sapiens" -t 9606
+
+This process can take around half an hour.
+
+4) Visualization
+In Neo4j interface, click on "Open Browser". When the database opens and loads, the user can interact with it through Cypher queries. The database should contain a total of x nodes and x relationships. When writing the following Cypher command:
+
+MATCH (n)-[r]-(y) WHERE n.id = 'O15516' AND y.id = 'CHEBI:15346' RETURN n.uniprotEntryName, r.ECs ,y.compoundName
+
+You should obtain the following result:
+
+"CLOCK_HUMAN"	["2.3.1.48"]	"coenzyme A"
+
+Congratulations,you have succeeded creating your first subgraph :)
