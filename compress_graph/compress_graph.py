@@ -356,7 +356,7 @@ if __name__ == '__main__':
 		'3-5ADP', "adenosine 5'-monophosphate", 'NH4+', 'ammonium', 'GTP', 'GDP', 'CTP',\
 		 'purine', 'pirimidine', 'guanosine phosphate', 'magnesium(2+)', 'ethanol', 'hydrogen']
 
-	metab_blacklist = []
+	#metab_blacklist = []
 
 	compress = compress_graph(gd)
 	compress.neo4j_to_dictionary(pattern)
