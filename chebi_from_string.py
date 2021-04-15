@@ -86,7 +86,7 @@ class chebi_from_string(): #TODO: test to see what we get in function of the inp
         '''
         Connect to the chebi client
         '''
-        wsdl='http://www.ebi.ac.uk/webservices/chebi/2.0/webservice?wsdl'
+        wsdl='https://www.ebi.ac.uk/webservices/chebi/2.0/webservice?wsdl'
         transport = zeep.Transport(operation_timeout=300)
         self.client = zeep.Client(wsdl=wsdl, transport=transport)
         return None
@@ -193,7 +193,7 @@ class chebi_from_string(): #TODO: test to see what we get in function of the inp
                 try:
                     chebisyn=self.client.service.getCompleteEntity(chebiId) #synonyms
                     break
-                except zeep.exceptions.TransportError, zeep.exceptions.Fault:
+                except (zeep.exceptions.TransportError, zeep.exceptions.Fault, requests.exceptions.ChunkedEncodingError):
                     chebisyn = []
                     pass
 

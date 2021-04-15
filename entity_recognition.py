@@ -358,8 +358,12 @@ class entity_recognition():
 		'''
 		Create a new metabolite into the graph database
 		'''
-		request = 'MERGE (n:Compound {id:"%s",textname: ["%s"],sentences: ["%s"],PMID_Tnb: ["%s"]})' %(pmId,textName,sentence,query)
-		self.db.session.run(request)
+		try:
+			request = 'MERGE (n:Compound {id:"%s",textname: ["%s"],sentences: ["%s"],PMID_Tnb: ["%s"]})' %(pmId,textName,sentence,query)
+			self.db.session.run(request)
+		except neo4j.exceptions.CypherSyntaxError:
+			request = 'MERGE (n:Compound {id:"%s",textname: ["%s"],sentences: ["no sentence"],PMID_Tnb: ["%s"]})' %(pmId,textName,query)
+			self.db.session.run(request)
 		return None
 
 
@@ -391,8 +395,11 @@ class entity_recognition():
 		'''
 		if r['s'] != None:
 			if sentence not in r['s']:
-				request = 'MATCH (n:%s) WHERE n.id="%s" SET n += {sentences: n.sentences + "%s"}'%(entityType, dbId, sentence)
-				self.db.session.run(request)
+				try:
+					request = 'MATCH (n:%s) WHERE n.id="%s" SET n += {sentences: n.sentences + "%s"}'%(entityType, dbId, sentence)
+					self.db.session.run(request)
+				except neo4j.exceptions.CypherSyntaxError:
+					pass
 		else:
 			request = 'MATCH (n:%s) WHERE n.id="%s" SET n.sentences = ["%s"]'%(entityType, dbId, sentence)
 			self.db.session.run(request)
@@ -533,10 +540,13 @@ class entity_recognition():
 			try:
 				self.db.session.run(request)
 			except neo4j.exceptions.CypherSyntaxError:
-				request = 'MERGE (a:Protein {id:"%s",name: "%s",textname: \
-				["%s"], sentences: ["%s"], PMID_Tnb: ["%s"], specie: "%s", query: ["%s"]})'\
-				%(dbId, textName, textName, "No sentence to show", graphQuery, self.species, query)
-				self.db.session.run(request)
+				try:
+					request = 'MERGE (a:Protein {id:"%s",name: "%s",textname: \
+					["%s"], sentences: ["%s"], PMID_Tnb: ["%s"], specie: "%s", query: ["%s"]})'\
+					%(dbId, textName, textName, "No sentence to show", graphQuery, self.species, query)
+					self.db.session.run(request)
+				except neo4j.exceptions.CypherSyntaxError:
+					pass
 		else:
 			uniEntry = self.protein_dictio[dbId]['uniprotEntry']
 			geneNames = self.protein_dictio[dbId]['uniprotgenenames']

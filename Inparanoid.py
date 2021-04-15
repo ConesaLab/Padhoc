@@ -119,7 +119,8 @@ class inparanoid():
 		print "Run the blasts (%s CPUs)" %str(cpu)
 		#curentpath=os.getcwd()
 		#os.chdir(self.fasta_repo)
-		listfa = glob.glob(self.fasta_repo + '*.fasta')
+		listfa = glob.glob(self.fasta_repo + '/*.fasta')
+		print listfa
 
 		jobs = []
 		pool = ActivePool()
@@ -143,9 +144,9 @@ class inparanoid():
 		sm   = multiprocessing.Semaphore(cpu)
 
 		for specie1 in species:
-			i = self.fasta_repo + specie1.replace(' ', '_') + '.fasta'
+			i = self.fasta_repo + '/' + specie1.replace(' ', '_') + '.fasta'
 			for specie2 in species:
-				j = self.fasta_repo + specie2.replace(' ', '_')	+ '.fasta'
+				j = self.fasta_repo + '/' + specie2.replace(' ', '_')	+ '.fasta'
 #				if specie1 != specie2:
 				check_rel = self.gd.check_species_relationship(specie1, specie2, 'Inparanoid_orthology')
 				if check_rel == False:

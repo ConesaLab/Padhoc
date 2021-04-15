@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import hashlib
-from SOAPpy import WSDL, SOAPProxy, Errors
+from SOAPpy import WSDL, SOAPProxy, Errors, Types
 from socket import error as socket_error
 from xml.sax import SAXParseException
 
@@ -40,6 +40,6 @@ class brenda_annotation():
                 try:
                         resultString = getattr(self.client,function)(parameters)
                         break
-                except (socket_error, SAXParseException, Errors.HTTPError):
+                except (socket_error, SAXParseException, Errors.HTTPError, Types.faultType):
                         pass
         return resultString
