@@ -94,13 +94,14 @@ It is possible to retrieve alternative information by using other cypher queries
 
 
 **Toy dataset**
+
 We have included a toy dataset to show the principles of Padhoc and for the user to ensure that the installation works properly. The toy example data is included with Padhoc in the folder toy_dataset.
 
 1) Import Homo sapiens database in Neo4j
 Create a new grap (Add graph > Create Local Graph), recommended version: 3.5.14. Select Manage and Open Terminal.
 Once the terminal is started, write the following command, substituting the "path_to_padhoc" with your local path:
 
- bin/neo4j-admin load --from="path_to_padhoc"/homoSapiens_db.dump --database=hsapiens_example.db
+ bin/neo4j-admin load --from="path_to_padhoc"toy_dataset/homoSapiens_db.dump --database=hsapiens_example.db
  
 Close the terminal. Change the database that Neo4j is using: Go to Settings > change line 11 where it says "#dbms.active_database=graph.db" to dbms.active_database=hsapiens_example.db (deleting the #). Apply changes.
 
